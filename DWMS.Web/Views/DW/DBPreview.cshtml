@@ -1,0 +1,120 @@
+﻿@model DWMS.Domain.DataSourceBase;
+@using DWMS.Web.Data;
+@using System.Data
+@{
+    ViewData["Title"] = "DBPreview";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+@{ 
+    int id = Model.ID;
+    DefaultContext context = ViewBag.Context;
+
+    DWMS.Domain.DSSQLServer dq = context.DSSQLServers.FirstOrDefault(x => x.ID == id);
+
+
+    //构造查询字符串
+    string connStr = "Server=" + dq.DBHost + ";" + "Database=" + dq.DBName + ";" + "uid=" + dq.UseId + ";" + "pwd=" + dq.Pwd + ";";
+
+    //查询当前数据库下包含的表
+
+    SQLHelper sQLHelper = new SQLHelper(connStr);
+    string ComText = "SELECT [NAME] TbName FROM SYSOBJECTS  WHERE TYPE='U'";
+    DataTable dt = sQLHelper.ExecuteReader(ComText, CommandType.Text);
+}
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            @*左侧是数据源及包含的表*@
+            <div class="col-2">
+                <div class="card" style="min-height:400px;">
+                    <div class="card-body p-2">
+                        <h5>
+                            @*数据源（SQL SERVER）*@
+                            @Html.DisplayFor(model => model.DStype)
+                        </h5>
+                        @Html.DisplayFor(model => model.DSName)
+                        <hr />
+                        <h5>表</h5>
+                        <div class="input-group input-group-sm">
+                            <input type="text" name="table_search" class="form-control float-right" placeholder="请输入表名" />
+                            <div class="input-group-append">
+                                <button type="submit" class="btn btn-default"><i class="fas fa-server"></i></button>
+                            </div>
+                        </div>
+                        <ul>
+                            @{
+                                for (int i = 0; i < dt.Rows.Count; i++)
+                                {
+                                    <li>
+                                        <a href="~/dw/DBPreview?curTb=@dt.Rows[i]["TbName"]">@dt.Rows[i]["TbName"]</a>
+                                    </li>
+                                }
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-10">
+                @* 右上：搜索条件 *@
+                <div class="card card-info">
+                    <div class="card-header">
+                        <h3 class="card-title">筛选条件</h3>
+                    </div>
+                    <!-- /.card-header -->
+                    <!-- form start -->
+                    <form class="form-horizontal">
+                        <div class="card-body">
+                            <div class="form-group row">
+                                <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+                                <div class="col-sm-4">
+                                    <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                                </div>
+                                <label for="inputEmail3" class="col-sm-2 col-form-label">Email</label>
+                                <div class="col-sm-4">
+                                    <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
+                                <div class="col-sm-4">
+                                    <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+                                </div>
+                                <label for="inputPassword3" class="col-sm-2 col-form-label">Password</label>
+                                <div class="col-sm-4">
+                                    <input type="password" class="form-control" id="inputPassword3" placeholder="Password">
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-info">查询</button>
+                        </div>
+                        <!-- /.card-footer -->
+                    </form>
+                </div>
+
+                @*右下：搜索结果*@
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                        </h3>
+                        <div class="card-tools">
+                            <div class="input-group input-group-sm" style="width: 150px;">
+                                <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+                                <div class="input-group-append">
+                                    <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body table-responsive p-0">
+                        @await Component.InvokeAsync("WidgetTable",new { connStr = connStr,tbName = "DimAccount" })
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

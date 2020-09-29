@@ -1,0 +1,9 @@
+D:\练习\DWMS\DWMS.Domain\bin\Debug\netstandard2.0\DWMS.Domain.deps.json
+D:\练习\DWMS\DWMS.Domain\bin\Debug\netstandard2.0\DWMS.Domain.dll
+D:\练习\DWMS\DWMS.Domain\bin\Debug\netstandard2.0\DWMS.Domain.pdb
+D:\练习\DWMS\DWMS.Domain\obj\Debug\netstandard2.0\DWMS.Domain.AssemblyInfoInputs.cache
+D:\练习\DWMS\DWMS.Domain\obj\Debug\netstandard2.0\DWMS.Domain.AssemblyInfo.cs
+D:\练习\DWMS\DWMS.Domain\obj\Debug\netstandard2.0\DWMS.Domain.dll
+D:\练习\DWMS\DWMS.Domain\obj\Debug\netstandard2.0\DWMS.Domain.pdb
+D:\练习\DWMS\DWMS.Domain\obj\Debug\netstandard2.0\DWMS.Domain.csproj.CoreCompileInputs.cache
+D:\练习\DWMS\DWMS.Domain\obj\Debug\netstandard2.0\DWMS.Domain.csprojAssemblyReference.cache

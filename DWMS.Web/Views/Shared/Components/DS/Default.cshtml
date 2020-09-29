@@ -1,0 +1,31 @@
+﻿@model IEnumerable<DWMS.Domain.DSSQLServer>
+@foreach (var item in Model)
+{
+    <div class="col-4">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">@item.DSName</h3>
+                <div class="card-tools">
+                    <div class="custom-control custom-checkbox mr-sm-2">
+                        <input type="checkbox" class="custom-control-input" name="cbxDS" id="cbxDS_@item.ID">
+                        <label class="custom-control-label" for="cbxDS_@item.ID"></label>
+                    </div>
+                </div>
+                <!-- /.card-tools -->
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body">
+                <p class="text-muted">
+                    @item.DSDesc
+                </p>
+            </div>
+            <!-- /.card-body -->
+            <div class="card-footer text-center">
+                <button type="button" class="btn btn-default btn-sm"><span>TODO 预览</span></button> |
+                <a asp-controller="DSSQLServer" class="btn btn-default btn-sm" asp-action="Edit" asp-route-id="@item.ID">编辑</a> |
+                <a asp-controller="DSSQLServer" class="btn btn-default btn-sm" asp-action="Delete" asp-route-id="@item.ID">删除</a>
+            </div>
+            <!-- /.card-footer -->
+        </div>
+    </div>
+}

@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "ZWUIgbQ6735CuLaVFYah9+L+f4mPpBE9qMJ3Nd7px0HbRllv3tBTx5Gc1hy9dXFQF6ESRlA0wzGqwNfCw1J8lw==",
+  "success": true,
+  "projectFilePath": "D:\\源代码\\DWMS\\DWMS.Domain\\DWMS.Domain.csproj",
+  "expectedPackageFiles": [
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.netcore.platforms\\1.1.0\\microsoft.netcore.platforms.1.1.0.nupkg.sha512",
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\netstandard.library\\2.0.3\\netstandard.library.2.0.3.nupkg.sha512",
+    "C:\\Users\\sqy\\.nuget\\packages\\system.componentmodel.annotations\\4.7.0\\system.componentmodel.annotations.4.7.0.nupkg.sha512"
+  ],
+  "logs": []
+}

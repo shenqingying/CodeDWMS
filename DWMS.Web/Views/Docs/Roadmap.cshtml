@@ -1,0 +1,163 @@
+﻿
+@{
+    ViewData["Title"] = "Roadmap";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+@{
+    DateTime dtNow = DateTime.Now;
+    DateTime dt1 = DateTime.Parse("2020-7-1"); //第一个里程碑完成的时间
+    TimeSpan ts1 = dtNow - dt1;
+
+    DateTime dt2 = DateTime.Parse("2020-8-15"); // 【TODO】第二个里程碑完成的时间
+    TimeSpan ts2 = dtNow - dt2;
+}
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>开发路线图</h1>
+            </div>
+            @*<div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Timeline</li>
+                    </ol>
+                </div>*@
+        </div>
+    </div>
+    <!-- /.container-fluid -->
+</section>
+
+<section class="content">
+    <div class="container-fluid">
+
+        <!-- Timelime example  -->
+        <div class="row">
+            <div class="col-md-10">
+                <!-- The time line -->
+                <div class="timeline">
+
+                    <!-- timeline time label -->
+                    <div class="time-label">
+                        <span class="bg-blue">30 Nov. 2020</span>
+                    </div>
+                    <!-- /.timeline-label -->
+                    <!-- timeline item -->
+                    <div>
+                        <i class="fa fa-charging-station bg-gradient-blue"></i>
+                        <div class="timeline-item">
+                            <span class="time"><i class="fas fa-clock"></i> 2020/9/30 </span>
+                            <h3 class="timeline-header"><a href="#"></a>检查与第一轮迭代，用户手册补充 & Go live! </h3>
+                            <div class="timeline-body">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END timeline item -->
+                    @* bug list。。。 *@
+                    <!-- timeline time label -->
+                    <div class="time-label">
+                        <span class="bg-blue">30 Nov. 2020</span>
+                    </div>
+                    <!-- /.timeline-label -->
+                    <!-- timeline item -->
+                    <div>
+                        <i class="fas fa-plane-departure bg-blue"></i>
+                        <div class="timeline-item">
+                            <span class="time"><i class="fas fa-clock"></i> 2020/9/30 </span>
+                            <h3 class="timeline-header"><a href="#"></a> 系统管理</h3>
+                            <div class="timeline-body">
+                                TODO: 待梳理
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END timeline item -->
+                    @* 进行中。。。 *@
+                    <!-- timeline time label -->
+                    <div class="time-label">
+                        <span class="bg-blue">30 Nov. 2020</span>
+                    </div>
+                    <!-- /.timeline-label -->
+                    <!-- timeline item -->
+                    <div>
+                        <i class="fas fa-plane-departure bg-blue"></i>
+                        <div class="timeline-item">
+                            <span class="time"><i class="fas fa-clock"></i>  2020/9/30 </span>
+                            <h3 class="timeline-header"><a href="#"></a>数据字典管理</h3>
+                            <div class="timeline-body">
+                                TODO: 待梳理
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END timeline item -->
+                    <!-- timeline time label -->
+                    <div class="time-label">
+                        <span class="bg-blue">15 Nov. 2020</span>
+                    </div>
+                    <!-- /.timeline-label -->
+                    <!-- timeline item -->
+                    <div>
+                        <i class="fas fa-plane-departure bg-blue"></i>
+                        <div class="timeline-item">
+                            <span class="time"><i class="fas fa-clock"></i> 2020/9/15 </span>
+                            <h3 class="timeline-header"><a href="#"></a> 数据采集管理 </h3>
+                            <div class="timeline-body">
+                                TODO: 待梳理
+                            </div>
+                        </div>
+                    </div>
+                    <!-- END timeline item -->
+                    <!-- timeline time label -->
+                    <div class="time-label">
+                        <span class="bg-gradient-red">15 Aug. 2020</span>
+                    </div>
+                    <!-- /.timeline-label -->
+                    <!-- timeline item -->
+                    <div>
+                        <i class="fas fa-plane-departure bg-red"></i>
+                        <div class="timeline-item">
+                            <span class="time"><i class="fas fa-clock"></i> 2020/8/15 </span>
+                            <h3 class="timeline-header font-weight-bold"><a href="#"></a>[预计8/M] 数据仓库管理</h3>
+                            <div class="timeline-body">
+                                1、数据源管理 <br />
+                                2、数据表预览 <br />
+                                3、SQL模型 <br />
+                                4、数据值映射 <br />
+                            </div>
+                   
+                        </div>
+                    </div>
+                    <!-- END timeline item -->
+                    <!-- timeline time label -->
+                    <div class="time-label">
+                        <span class="bg-green">1 Jul. 2020</span>
+                    </div>
+                    <!-- /.timeline-label -->
+                    <!-- timeline item -->
+                    <div>
+                        <i class="fas fa-place-of-worship bg-green"></i>
+                        <div class="timeline-item">
+                            <span class="time"><i class="fas fa-clock"></i> @ts1.Days  days ago</span>
+                            <h3 class="timeline-header"><a href="#"></a> [✔] 项目启动 </h3>
+                            <div class="timeline-body">
+                                1、整体框架搭建 <br />
+                                2、管理员样式应用 <br />
+                                3、EF 数据访问层构建
+                            </div>
+                  
+                        </div>
+                    </div>
+                    <!-- END timeline item -->
+
+                    <div>
+                        <i class="fas fa-clock bg-gray"></i>
+                    </div>
+                </div>
+            </div>
+            <!-- /.col -->
+        </div>
+    </div>
+    <!-- /.timeline -->
+</section>
+
+

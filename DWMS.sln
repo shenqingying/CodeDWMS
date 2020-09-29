@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30204.135
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DWMS.Web", "DWMS.Web\DWMS.Web.csproj", "{97A5333A-C0C7-44DB-B096-6ADB5657DA30}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DWMS.Domain", "DWMS.Domain\DWMS.Domain.csproj", "{967A3438-3871-493A-9E62-667F42393783}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{97A5333A-C0C7-44DB-B096-6ADB5657DA30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{97A5333A-C0C7-44DB-B096-6ADB5657DA30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{97A5333A-C0C7-44DB-B096-6ADB5657DA30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{97A5333A-C0C7-44DB-B096-6ADB5657DA30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{967A3438-3871-493A-9E62-667F42393783}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{967A3438-3871-493A-9E62-667F42393783}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{967A3438-3871-493A-9E62-667F42393783}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{967A3438-3871-493A-9E62-667F42393783}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BE7EA9E2-7827-46C2-BD78-075F99152540}
+	EndGlobalSection
+EndGlobal

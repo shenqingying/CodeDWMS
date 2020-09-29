@@ -1,0 +1,219 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0 text-dark">数据源管理</h1>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="float-sm-right">
+                    <button type="button" id="btnAddDataSource" class="btn btn-default"><span>添加数据源</span></button>
+                    <button type="button" class="btn btn-default"><span>上传 Excel</span></button>
+                </div>
+            </div>
+        </div>
+        <hr />
+    </div>
+</div>
+
+<div class="content">
+    <div class="container-fluid">
+        <div>
+            <button type="button" class="btn btn-default btn-sm"><span>TODO 全选</span></button>
+            <button type="button" class="btn btn-default btn-sm"><span>TODO 批量删除</span></button>
+        </div>
+        <br />
+
+        <div class="row">
+            @* 示例卡片，后面删除 *@
+            <div class="col-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">示例数据源</h3>
+                        <div class="card-tools">
+                            <!-- Buttons, labels, and many other things can be placed here! -->
+                            <!-- Here is a label for example -->
+                            <div class="custom-control custom-checkbox mr-sm-2">
+                                <input type="checkbox" class="custom-control-input" id="customControlAutosizing">
+                                <label class="custom-control-label" for="customControlAutosizing"></label>
+                            </div>
+                        </div>
+                        <!-- /.card-tools -->
+                    </div>
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <p class="text-muted">
+                            示例数据源，供用户测试使用
+                        </p>
+                    </div>
+                    <!-- /.card-body -->
+                    <div class="card-footer text-center">
+                        <button type="button" class="btn btn-default btn-sm"><span>预览</span></button>
+                    </div>
+                    <!-- /.card-footer -->
+                </div>
+                <!-- /.card -->
+            </div>
+
+            @* 调用 view component，生成数据源 卡片列表 *@
+            @await Component.InvokeAsync("DS", new { })
+
+        </div><!-- /.row -->
+    </div>
+</div>
+<!-- Model -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLable">添加数据源</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form asp-action="Create">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <div class="form-group">
+                                    <label class="control-label">类型</label>
+                                    <select class="form-control">
+                                        <option value="SQLServer">SQL SERVER</option>
+                                    </select>
+                                    <span class="text-info">* SQL Server 版本需要在2012及以上</span>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">数据源名称</label>
+                                    <input type="text" class="form-control" id="dsName"name="dsName" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">描述</label>
+                                    <input type="text" class="form-control" id="dsDesc" name="dsDesc" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">数据库地址Host</label>
+                                    <input type="text" class="form-control" id="host" name="host" />
+                                    <span class="text-info">* 如用到端口，添加在地址后，如 192.168.10.10.1433</span>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">数据库名</label>
+                                    <input type="text" class="form-control" id="database" name="database" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">用户名</label>
+                                    <input type="text" class="form-control" id="username" name="database" />
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label">密码</label>
+                                    <input type="password" class="form-control" id="password" name="password" />
+                                </div>
+                                <span id="connInfo" class="text-danger">  </span>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnTryConn" class="btn btn-info">测试连接</button>
+                <button type="button" id="btnSaveConn" class="btn btn-danger">添加</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles{ }
+
+
+@section Scripts{
+    <script>
+        // 弹出模态对话框 -- 数据源添加
+        document.querySelector("#btnAddDataSource").onclick = function () {
+            $('#exampleModal').modal({
+                backdrop: 'static'
+                //keyboard: false
+            });
+        };
+        // 验证数据源是否能连接
+        document.querySelector("#btnTryConn").onclick = function () {
+            // 1、获取表单数据库连接相关字段：数据库地址Host，端口号，数据库名，用户名，密码
+            var host = document.querySelector("#host").value;
+            var database = document.querySelector("#database").value;
+            var username = document.querySelector("#username").value;
+            var password = document.querySelector("#password").value;
+
+
+            // 2、提交 web api 验证，返回验证消息
+            var connToValidate = "Server=" + host + ";Database=" + database + ";uid=" + username + ";pwd=" + password + ";";
+
+            var postData = {
+                Conn: connToValidate,
+            };
+
+            // 3、显示验证消息
+            $.ajax({
+                contentType: 'application/json',
+                type: "POST",
+                url: '@Url.Content("~/api/tryConn")',
+                cache: false,
+                data: JSON.stringify(postData),
+                dataType: 'text', // 预期服务器返回的数据类型
+                success: function (msg) {
+                    document.querySelector("#connInfo").innerHTML = msg;
+                    //alert("Data Saved: " + msg);
+                }
+            });
+        };
+
+        // 添加至数据库
+        document.querySelector("#btnSaveConn").onclick = function () {
+            // 1、获取表单数据库连接相关字段：数据库地址Host，端口号，数据库名，用户名，密码
+            var host = document.querySelector("#host").value;
+            var database = document.querySelector("#database").value;
+            var username = document.querySelector("#username").value;
+            var password = document.querySelector("#password").value;
+            var dsName = document.querySelector("#dsName").value;
+
+            console.log(dsName);
+
+
+            // 2、提交 web api 验证，返回验证消息
+            var connToValidate = "Server=" + host + ";Database=" + database + ";uid=" + username + ";pwd=" + password + ";";
+
+            var postData = {
+                Conn: connToValidate,
+                host: host,
+                database: database,
+                username: username,
+                password: password,
+                dsName: dsName,
+                dsDesc: document.querySelector("#dsDesc").value
+            };
+
+            // 3、显示验证消息
+            $.ajax({
+                contentType: 'application/json',
+                type: "POST",
+                url: '@Url.Content("~/api/saveConn")',
+                cache: false,
+                data: JSON.stringify(postData),
+                dataType: 'text', // 预期服务器返回的数据类型
+                success: function (msg) {
+                    document.querySelector("#connInfo").innerHTML = msg;
+
+                    // 【TODO】关闭模态对话框，并重新加载页面
+
+                    //alert("Data Saved: " + msg);
+                }
+            });
+        };
+
+    </script>
+}

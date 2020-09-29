@@ -1,0 +1,91 @@
+﻿<!--获取json格式数据源-->
+<!--动态拼接 table-->
+@{
+    <!--Html.Raw()方法输出带有html的字符串-->
+    var tbData = @Html.Raw(ViewBag.jsonRes);
+}
+<div id="createTable"></div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+<script>
+    var jsonData = @tbData;
+
+    console.log(jsonData)
+
+    var arrRes = formatTwoDimensional(jsonData);
+
+    
+
+    //将json转换成二维数据
+    function formatTwoDimensional(arr) {
+        var testArr = [];
+
+
+        
+        //完成标题的填充
+        for (var attr in arr[0]) {
+            testArr.push(attr);
+        }
+
+       
+
+        //完成数据的填充
+        for (var i=0; i < arr.length; i++) {
+            var tmpArr = [];
+            for (var attr in arr[i]) {
+                
+
+                tmpArr.push(arr[i][attr])
+            }
+            arr[i] = tmpArr;
+        }
+        //把标题和数据组合起来[[标题,数据],[标题,数据],[标题,数据]..]
+        console.log(testArr)
+        console.log(arr)
+        //unshift 将一个元素添加到数组的开头，并返回数组的新长度
+        arr.unshift(testArr);
+
+        console.log(arr)
+
+        return arr;
+        
+    }
+
+    // 拼接 table 的 html
+    createTb(arrRes);
+
+
+    function createTb(arrRes) {
+        var data = arrRes;
+        var rowCount = data.length;
+        var cellCount = 0;
+
+        var table = $("<table class = \"table\">");
+        table.appendTo($("#createTable"));
+
+        var trHeader = $("<tr></tr>")
+        trHeader.appendTo(table);
+        //插入标题
+        for (var item in data[0]) {
+            var td = $("<th>" + data[0][item] + "</th>")
+            td.appendTo(trHeader);
+            cellCount++;
+        }
+        //再插入数据
+        for (var i = 1; i < rowCount; i++) {
+            var tr = $("<tr></tr>")
+            tr.appendTo(table);
+            for (var j = 0; j < cellCount; j++) {
+                var value = "";
+                if (data[i][j] != null) {
+                    value = data[i][j];
+                }
+                var td = $("<td>" + value + "</td>");
+
+                td.appendTo(tr);
+            }
+        }
+        $("#createTable").append("</table>")
+    }
+</script>
